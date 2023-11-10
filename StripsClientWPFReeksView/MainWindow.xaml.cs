@@ -1,4 +1,5 @@
-﻿using StripsClientWPFReeksView.Model;
+﻿//using StripsClientWPFReeksView.Model;
+using StripsClientWPFReeksView.ModelOutput;
 using StripsClientWPFReeksView.Services;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,21 @@ namespace StripsClientWPFReeksView
 
         private async void GetReeksButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            ReeksRESToutputDTO reeks = null;
+            path = "api/Strips/Reeks/" + ReeksIdTextBox.Text;
+            reeks = await stripService.GetReeksAsync(path);
+            if (reeks != null)
+            {
+                NaamTextBox.Text = reeks.Naam;
+                AantalTextBox.Text = Convert.ToString(reeks.AantalStrips);
+                StripsDataGrid.ItemsSource = reeks.Strips;
+            }
+            else
+            {
+                MessageBox.Show("Reeks niet gevonden");
+            }
+
+
         }
     }
 }

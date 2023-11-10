@@ -1,4 +1,4 @@
-﻿using StripsBL.DTOs;
+﻿
 using StripsBL.Exceptions;
 using StripsBL.Interfaces;
 using StripsBL.Model;
@@ -19,6 +19,18 @@ namespace StripsBL.Managers
             this.stripsRepository = stripsRepository;
         }
 
+        public Reeks GeefReeks(int reeksid)
+        {
+            try
+            {
+                return stripsRepository.GeefReeks(reeksid);
+            }
+            catch (Exception ex)
+            {
+
+                throw new StripsManagerException("Geefreeks", ex);
+            }
+        }
        
     }
 }

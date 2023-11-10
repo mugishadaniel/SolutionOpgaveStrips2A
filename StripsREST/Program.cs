@@ -8,10 +8,12 @@ namespace StripsREST
     {
         public static void Main(string[] args)
         {
-            string connectionString = ";Integrated Security=True"; ;
+            string connectionString = "Data Source=DANIEL\\SQLEXPRESS;Initial Catalog=Strips;Integrated Security=True"; ;
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddSingleton<IStripsRepository, StripsRepository>(r => new StripsRepository(connectionString));
+            builder.Services.AddSingleton<StripsManager>();
             
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
